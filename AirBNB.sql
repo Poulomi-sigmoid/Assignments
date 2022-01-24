@@ -20,8 +20,8 @@ FROM air_bnb
 GROUP BY listing_id, dates
 HAVING count(*)>1;
 
-DELETE t1 FROM (SELECT *, ROW_NUMBER() OVER(listing_id)  as rownum  FROM air_bnb) t1  
-INNER JOIN (SELECT *, ROW_NUMBER() OVER(listing_id)  as rownum FROM air_bnb) t2   
+DELETE t1 FROM (SELECT *, ROW_NUMBER() OVER(partition by listing_id)  as rownum  FROM air_bnb) t1  
+INNER JOIN (SELECT *, ROW_NUMBER() OVER(partition by listing_id)  as rownum FROM air_bnb) t2   
 WHERE  
     t1.dates = t2.dates AND  
     t1.listing_id = t2.listing_id AND
