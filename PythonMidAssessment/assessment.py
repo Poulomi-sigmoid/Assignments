@@ -4,7 +4,7 @@ class Logger:
         self.incoming_messages = {}
 
     def should_print_message(self, timestamp=None, message=None):
-        if timestamp is None or message is None:
+        if timestamp == '' or message == '':
             return
         if message in self.incoming_messages.keys():
             if timestamp < self.incoming_messages[message]:
@@ -33,10 +33,7 @@ try:
         if message.lower() == 'quit':
             break
         print()
-        if timestamp == '' and message == '':
-            result.append(logger.should_print_message())
-        else:
-            result.append(logger.should_print_message(timestamp, message))
+        result.append(logger.should_print_message(timestamp, message))
 
     print()
     print("Output logs :- ")
