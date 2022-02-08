@@ -77,9 +77,7 @@ if __name__ == "__main__":
 
         collection = client['moviesData']['movies']
         print("Q4) Create Python methods and MongoDB queries to support the below operations -")
-        print('''Choices : 
-        Find top `N` movies for each genre with the highest IMDB rating.
-            ''')
+        print("Find top `N` movies for each genre with the highest IMDB rating.")
         task()
     except:
         print("Could not establish connection")
