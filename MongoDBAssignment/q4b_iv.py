@@ -15,6 +15,16 @@ def task():
                 'genres': 1
             }
         }, {
+            '$sort': {
+                'rating': -1
+            }
+        }, {
+            '$match': {
+                'rating': {
+                    '$ne': ''
+                }
+            }
+        }, {
             '$group': {
                 '_id': '$genres',
                 'movies': {
@@ -22,28 +32,6 @@ def task():
                         'movie': '$title',
                         'rating': '$rating'
                     }
-                }
-            }
-        }, {
-            '$unwind': {
-                'path': '$movies',
-                'preserveNullAndEmptyArrays': False
-            }
-        }, {
-            '$sort': {
-                'movies.rating': -1
-            }
-        }, {
-            '$match': {
-                'movies.rating': {
-                    '$ne': ''
-                }
-            }
-        }, {
-            '$group': {
-                '_id': '$_id',
-                'movies': {
-                    '$push': '$movies'
                 }
             }
         }, {
